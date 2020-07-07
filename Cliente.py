@@ -14,8 +14,8 @@ from socket import error as socket_error
 
 HEADER_LENGTH = 10
 aux = True
-IP = "10.0.0.20"
-PORT = 1234
+IP = "192.168.10.20"
+PORT = 1235
 my_username = "Tuti"
 
 # Creación del Socket
