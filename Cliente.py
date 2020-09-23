@@ -80,11 +80,13 @@ while True:
     time.sleep(1)
     message = "NONE"
     # Lectura de Temperatura y Humedad
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-    if humidity is not None and temperature is not None:
-            message = str(temperature) + "," + str(humidity) + "," + str(chan.voltage) + "," + str(chan1.voltage) + "," + time.strftime("%H:%M:%S")
-    else:
-            message = '1000' + "," + '1000' + "," + str(chan.voltage) + "," + str(chan1.voltage) + "," + time.strftime("%H:%M:%S")
+    humidity, temperature = Adafruit_DHT.read(sensor, pin)
+    while (humidity is None and temperature is None):
+        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+    #if humidity is not None and temperature is not None:
+    message = str(temperature) + "," + str(humidity) + "," + str(chan.voltage) + "," + str(chan1.voltage) + "," + time.strftime("%H:%M:%S")
+    #else:
+        #message = '1000' + "," + '1000' + "," + str(chan.voltage) + "," + str(chan1.voltage) + "," + time.strftime("%H:%M:%S")
     # Si el mensaje no esta vacio enviarlo al Server
     if message:
         # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
